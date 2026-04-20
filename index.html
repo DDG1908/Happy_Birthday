@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>To_XiaoXun</title>
+    <title>小薰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -202,13 +202,13 @@
         
             function typeNext() {
         
-                // ✅ 全部打完
+                // 全部打完
                 if (lineIdx >= GREETING_TEXT.length) {
                     setTimeout(() => startFalling(linesDOM), WAIT_BEFORE_FALL);
                     return;
                 }
         
-                // ✅ 创建新行
+                // 创建新行
                 if (!linesDOM[lineIdx]) {
                     let lineDiv = document.createElement('div');
                     container.appendChild(lineDiv);
@@ -217,7 +217,7 @@
         
                 let text = GREETING_TEXT[lineIdx];
         
-                // ✅ 逐字打
+                // 逐字打
                 if (charIdx < text.length) {
         
                     let char = text[charIdx];
@@ -231,24 +231,24 @@
                     linesDOM[lineIdx].div.appendChild(charSpan);
                     linesDOM[lineIdx].chars.push(charSpan);
         
-                    // 🔊 打字音效
+                    // 打字音效
                     playTypeSound();
         
                     charIdx++;
         
                     // =========================
-                    // ⭐ 核心：打字节奏
+                    // 核心：打字节奏
                     // =========================
         
-                    // 1️ 基础随机速度（手速波动）
+                    // 1️基础随机速度
                     let delay = 60 + Math.random() * 120;
         
-                    // 2️ 标点停顿（思考感）
-                    if (['，','。','！','？','✨','：'].includes(char)) {
-                        delay += 150 + Math.random() * 150;
-                    }
+                    // 2️标点停顿
+                    // if (['，','。','！','？','✨','：'].includes(char)) {
+                    //     delay += 150 + Math.random() * 150;
+                    // }
         
-                    //  换行前停顿
+                    // 3️换行前停顿
                     if (charIdx === text.length) {
                         delay += 300;
                     }
@@ -318,9 +318,9 @@
 				    
 				    const lines = [
 				        "> 嘀！结束喽 ૮( '⏖' )ა",
-				        "> 本次共为您绽放了 365 朵专属星火 ✨",
-				        "> 烟花已结束...",
-				        "> 正在为你续费接下来一年的好运与快乐",
+				        "> 本次共为你绽放了 365 朵专属星火 ✨",
+				        "> 接下来...",
+				        "> 为你续费一整年的好运与快乐",
 						"> 进度加载中：██████████ 100%",
 						"> 续费完成（V我50😌）",
 				        "> 再次祝你生日快乐，永远有期待！",
@@ -353,8 +353,7 @@
 								p.innerHTML += text[charIdx];
 								let currentChar = text[charIdx]; // 获取当前打出的字符
 								charIdx++;
-
-								if (lineTdx !== 4) {
+								if(lineIdx !== 4) {
 									playTypeSound(); // 触发键盘声
 								}
 								
@@ -362,12 +361,14 @@
 								let delay = 100 + Math.random() * 50;
 								
 								// 2. 标点符号停顿：遇到标点或空格，额外思考停顿 100~200ms
-								if (['，', '。', '！', '？', ' ', '>', '૮'].includes(currentChar)) {
-									delay += 100 + Math.random() * 100;
-								}
+								// if (['，', '。', '！', '？', ' ', '>', '૮'].includes(currentChar)) {
+								// 	delay += 100 + Math.random() * 100;
+								// }
 								if (currentChar === "V") {
-									delay += 2500
-									// soundManager.playSound('burstSmall', 0.5)
+									delay += 2000
+								}
+								if (currentChar === "花") {
+									soundManager.playSound('burstSmall', 0.5)
 								}
 								setTimeout(typeNextChar, delay);
 							} else {
@@ -385,7 +386,7 @@
 				    typeLine();
 				}
 				
-				//  音效：红轴机械键盘
+				// ★ 音效：红轴机械键盘
 				function playTypeSound() {
 				    try {
 				        const ctx = soundManager.ctx;
